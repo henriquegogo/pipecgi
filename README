@@ -1,0 +1,33 @@
+PIPE CGI
+========
+This project demonstrates a proof of concept for a persistent server
+that communicates with CGI-BIN client requests and processes HTTP
+requests efficiently.
+
+How to use
+----------
+- Compile the C client:
+  $ make
+- Start a http server with CGI-BIN support:
+  $ busybox -p 8000
+- Start the application server:
+  $ ./server-example.sh
+- Make a request:
+  $ curl localhost:8000/cgi-bin/index.cgi
+  $ curl -XPOST localhost:8000/cgi-bin/client.sh -d "content=test"
+
+Motivation
+----------
+CGI (Common Gateway Interface) has well-known limitations, particularly
+the overhead of spawning a new process for each request, which affects
+performance.
+
+This approach uses a minimal statically compiled client (invoked via the
+standard CGI-BIN process) that communicates with a persistent
+application server through FIFO (named pipes). The persistent server
+handles resource-intensive tasks, improving efficiency and reducing the
+overhead typically associated with CGI.
+
+License
+-------
+MIT
