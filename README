@@ -8,10 +8,13 @@ How to use
 ----------
 - Compile the C client:
   $ make
+
 - Start a http server with CGI-BIN support:
   $ busybox -p 8000
+
 - Start the application server:
   $ ./server-example.sh
+
 - Make a request:
   $ curl localhost:8000/cgi-bin/index.cgi
   $ curl -XPOST localhost:8000/cgi-bin/client.sh -d "content=test"
